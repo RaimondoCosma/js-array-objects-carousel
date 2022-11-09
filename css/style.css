@@ -66,3 +66,12 @@ img {
 .next-btn {
     bottom: .625rem;
 }
+/* ------------------------------
+    HIDE & SHOW
+------------------------------ */
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}

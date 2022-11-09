@@ -6,3 +6,27 @@
     padding: 0;
     box-sizing: border-box;
  }
+
+/* ------------------------------
+    COMMONS
+------------------------------ */
+body {
+    height: 100vh;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 62.5rem;
+    margin: auto;
+}
+.col__image {
+    width: 70%;
+    height: 18.75rem;
+    background-color: antiquewhite;
+}
+.col__preview__image {
+    width: 30%;
+    height: 18.75rem;
+    background-color: bisque;
+}

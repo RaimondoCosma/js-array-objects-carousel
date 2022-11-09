@@ -21,12 +21,16 @@ body {
     margin: auto;
 }
 .image-container {
+    position: relative;
     width: 80%;
 }
 .col__image {
-    position: relative;
-    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
     height: 21.875rem;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 img {
     display: block;
@@ -40,6 +44,7 @@ img {
     color: white;
     right: 1.25rem;
     bottom: 1.875rem;
+    background-color: rgba(92, 92, 92, 0.521);
 }
 .col__preview__image {
     position: relative;
@@ -72,9 +77,26 @@ img {
 /* ------------------------------
     HIDE & SHOW
 ------------------------------ */
-.hide {
-    display: none;
-}
 .show {
-    display: block !important;
+    opacity: 1 !important;
+    animation: zoom-in 0.5s ease-in-out;
+    z-index: 1;
+}
+
+/* ------------------------------
+    KEYFRAME
+------------------------------ */
+@keyframes zoom-in {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

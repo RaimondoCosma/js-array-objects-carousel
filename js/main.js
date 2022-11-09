@@ -33,9 +33,13 @@ carousel.append(carouselTemplate);
 for ( let i = 0; i < images.length; i++ ){
     const image = images[i];
     const imageContainer = document.querySelector('.image-container');
+
     // Creo Contenitore di immagini di copertina
     let carouselImage = document.createElement('div');
-    carouselImage.classList.add('col__image', 'hide');
+    carouselImage.classList.add('col__image');
+    if(i === 0) {
+        carouselImage.classList.add("show");
+    }
     let imgCarousel = document.createElement('img');
     imgCarousel.setAttribute('src', image.image);
     carouselImage.append(imgCarousel);
@@ -51,7 +55,7 @@ for ( let i = 0; i < images.length; i++ ){
     description.append(imageSubtitle);
     carouselImage.append(description);
     imageContainer.append(carouselImage);
-    // /Creo Contenitore di immagini di copertina
+    // Creo Contenitore di immagini di copertina
     
     // Creo contenitore immagini di anteprima
     const previewImage = document.querySelector('.col__preview__image');
@@ -62,8 +66,35 @@ for ( let i = 0; i < images.length; i++ ){
     img.setAttribute('src', image.image);
     div.append(img);
     previewImage.append(div);
-    // /Creo contenitore immagini di anteprima
+    // Creo contenitore immagini di anteprima
+
+    // Creo evento Click
+    //  Mi conservo una variabile con valore di active = 0;
+    let active = 0;
+    // Evento bottone per elemento successivo
+    const next = document.querySelector(".next-btn");
+    next.addEventListener('click', function() {   
+        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        if ( active === images.length -1 ) {
+            active = 0;
+        } else {
+            active++;
+        }
+        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+    })
+    // Evento bottone per elemento precedente
+    const prev = document.querySelector(".prev-btn");
+    prev.addEventListener('click', function() {   
+        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        if (active === 0) {
+            active = images.length - 1;
+        } else {
+            active--;
+        }
+        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+    })
+    // Creo evento Click
 }
-const carouselImage = document.querySelector('.col__image');
-carouselImage.classList.add('show');
+
+
 

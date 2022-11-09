@@ -43,7 +43,9 @@ img {
     position: absolute;
     text-align: right;
     color: white;
+    padding: .3125rem .625rem;
     right: 1.25rem;
+    left: 1.25rem;
     bottom: 1.875rem;
     background-color: rgba(92, 92, 92, 0.521);
 }

@@ -76,7 +76,8 @@ for ( let i = 0; i < images.length; i++ ){
     let active = 0;
     // Evento bottone per elemento successivo
     const next = document.querySelector(".next-btn");
-    next.addEventListener('click', function() {   
+    next.addEventListener('click', function() {
+        clearInterval(automaticPlay);  
         imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
         document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if ( active === images.length -1 ) {
@@ -89,7 +90,8 @@ for ( let i = 0; i < images.length; i++ ){
     })
     // Evento bottone per elemento precedente
     const prev = document.querySelector(".prev-btn");
-    prev.addEventListener('click', function() {   
+    prev.addEventListener('click', function() { 
+        clearInterval(automaticPlay);  
         imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
         document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if (active === 0) {
@@ -101,6 +103,21 @@ for ( let i = 0; i < images.length; i++ ){
         document.querySelectorAll(".preview")[active].classList.add("border-white");
     })
     // Creo evento Click
+
+    // Creo evento cambio automatico 
+    // Dichiaro una variabileper il set intervall
+    const automaticPlay = setInterval(function(){
+        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        document.querySelectorAll(".preview")[active].classList.remove("border-white");
+        if ( active === images.length -1 ) {
+            active = 0;
+        } else {
+            active++;
+        }
+        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+        document.querySelectorAll(".preview")[active].classList.add("border-white");
+    },3000)
+    // Creo evento cambio automatico 
 }
 
 

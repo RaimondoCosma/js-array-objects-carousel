@@ -24,7 +24,6 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
-
 // Dichiaro variabile relativa al contenitore del carousel
 const carousel = document.querySelector('.container');
 // Variabile per la clonazione del template creato
@@ -77,7 +76,8 @@ for ( let i = 0; i < images.length; i++ ){
     // Evento bottone per elemento successivo
     const next = document.querySelector(".next-btn");
     next.addEventListener('click', function() {
-        clearInterval(automaticPlay);  
+        clearInterval(automaticPlay); 
+        clearInterval(automaticPlayReverse); 
         imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
         document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if ( active === images.length -1 ) {
@@ -91,7 +91,8 @@ for ( let i = 0; i < images.length; i++ ){
     // Evento bottone per elemento precedente
     const prev = document.querySelector(".prev-btn");
     prev.addEventListener('click', function() { 
-        clearInterval(automaticPlay);  
+        clearInterval(automaticPlay); 
+        clearInterval(automaticPlayReverse); 
         imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
         document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if (active === 0) {
@@ -104,9 +105,11 @@ for ( let i = 0; i < images.length; i++ ){
     })
     // Creo evento Click
 
-    // Creo evento cambio automatico 
+    // Creo evento cambio automatico autoplay
     // Dichiaro una variabileper il set intervall
-    const automaticPlay = setInterval(function(){
+    const automaticPlay = setInterval(myFunction, 3000);
+    function myFunction(){
+        clearInterval(automaticPlayReverse); 
         imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
         document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if ( active === images.length -1 ) {
@@ -116,8 +119,41 @@ for ( let i = 0; i < images.length; i++ ){
         }
         imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
         document.querySelectorAll(".preview")[active].classList.add("border-white");
-    },3000)
-    // Creo evento cambio automatico 
+    };
+    // Creo evento cambio automatico autoplay
+
+    // Creo evento cambio automatico autoplay-reverse
+    const automaticPlayReverse = setInterval(functionReverse, 3000);
+    function functionReverse(){
+        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        document.querySelectorAll(".preview")[active].classList.remove("border-white");
+        if (active === 0) {
+            active = images.length - 1;
+        } else {
+            active--;
+        }
+        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+        document.querySelectorAll(".preview")[active].classList.add("border-white");
+    }
+    // Creo evento cambio automatico autoplay-reverse
+
+    // Creo evento click con autoplay al click del bottone
+    // Dichiaro la variabile associata al borttone autoplay
+    const autoplay = document.getElementById('autoplay');
+    // Aggiungo evento al bottone
+    autoplay.addEventListener('click', function(){
+        myFunction();
+    })
+    // Creo evento click con autoplay al click del bottone
+
+    // Creo evento click con autoplay-reverse al click del bottone
+    // Dichiaro la variabile associata al borttone autoplay
+    const autoplayReverse = document.getElementById('autoplay-reverse');
+    // Aggiungo evento al bottone
+    autoplayReverse.addEventListener('click', function(){
+        functionReverse();
+    });
+    // Creo evento click con autoplay-reverse al click del bottone
 }
 
 

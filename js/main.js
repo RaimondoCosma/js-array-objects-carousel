@@ -61,6 +61,9 @@ for ( let i = 0; i < images.length; i++ ){
     const previewImage = document.querySelector('.col__preview__image');
     let div = document.createElement('div');
     div.classList.add('preview');
+    if ( i === 0 ){
+        div.classList.add('border-white');
+    }
     div.id = `preview-${i}`;
     let img = document.createElement('img');
     img.setAttribute('src', image.image);
@@ -75,23 +78,27 @@ for ( let i = 0; i < images.length; i++ ){
     const next = document.querySelector(".next-btn");
     next.addEventListener('click', function() {   
         imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if ( active === images.length -1 ) {
             active = 0;
         } else {
             active++;
         }
         imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+        document.querySelectorAll(".preview")[active].classList.add("border-white");
     })
     // Evento bottone per elemento precedente
     const prev = document.querySelector(".prev-btn");
     prev.addEventListener('click', function() {   
         imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if (active === 0) {
             active = images.length - 1;
         } else {
             active--;
         }
         imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+        document.querySelectorAll(".preview")[active].classList.add("border-white");
     })
     // Creo evento Click
 }

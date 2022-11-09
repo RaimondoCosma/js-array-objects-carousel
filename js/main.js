@@ -27,8 +27,43 @@ const images = [
 
 // Dichiaro variabile relativa al contenitore del carousel
 const carousel = document.querySelector('.container');
-
 // Variabile per la clonazione del template creato
 const carouselTemplate = document.getElementById('carousel-template').content.cloneNode(true);
-
 carousel.append(carouselTemplate);
+for ( let i = 0; i < images.length; i++ ){
+    const image = images[i];
+    const imageContainer = document.querySelector('.image-container');
+    // Creo Contenitore di immagini di copertina
+    let carouselImage = document.createElement('div');
+    carouselImage.classList.add('col__image', 'hide');
+    let imgCarousel = document.createElement('img');
+    imgCarousel.setAttribute('src', image.image);
+    carouselImage.append(imgCarousel);
+    let description = document.createElement('div');
+    description.classList.add('description');
+    let imageTitle = document.createElement('div');
+    imageTitle.classList.add('image__title');
+    imageTitle.innerHTML = `<h3>${image.title}</h3>`;
+    description.append(imageTitle);
+    let imageSubtitle = document.createElement('div');
+    imageSubtitle.classList.add('image__subtitle');
+    imageSubtitle.innerHTML = `<p>${image.text}</p>`;
+    description.append(imageSubtitle);
+    carouselImage.append(description);
+    imageContainer.append(carouselImage);
+    // /Creo Contenitore di immagini di copertina
+    
+    // Creo contenitore immagini di anteprima
+    const previewImage = document.querySelector('.col__preview__image');
+    let div = document.createElement('div');
+    div.classList.add('preview');
+    div.id = `preview-${i}`;
+    let img = document.createElement('img');
+    img.setAttribute('src', image.image);
+    div.append(img);
+    previewImage.append(div);
+    // /Creo contenitore immagini di anteprima
+}
+const carouselImage = document.querySelector('.col__image');
+carouselImage.classList.add('show');
+

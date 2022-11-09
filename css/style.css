@@ -39,6 +39,7 @@ img {
     bottom: 1.875rem;
 }
 .col__preview__image {
+    position: relative;
     width: 20%;
     height: 21.875rem;
 }
@@ -46,4 +47,22 @@ img {
     width: 100%;
     height: calc(100% / 5);
     border: 1px solid black;
+}
+.prev-btn, .next-btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: lightgray;
+    cursor: pointer;
+}
+.prev-btn {
+    top: .625rem;
+}
+.next-btn {
+    bottom: .625rem;
 }

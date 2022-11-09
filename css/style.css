@@ -12,21 +12,38 @@
 ------------------------------ */
 body {
     height: 100vh;
+    display: flex;
 }
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     max-width: 62.5rem;
+    width: 100%;
     margin: auto;
 }
 .col__image {
-    width: 70%;
-    height: 18.75rem;
-    background-color: antiquewhite;
+    position: relative;
+    width: 80%;
+    height: 21.875rem;
+}
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.description {
+    position: absolute;
+    text-align: right;
+    color: white;
+    right: 1.25rem;
+    bottom: 1.875rem;
 }
 .col__preview__image {
-    width: 30%;
-    height: 18.75rem;
-    background-color: bisque;
+    width: 20%;
+    height: 21.875rem;
+}
+.preview {
+    width: 100%;
+    height: calc(100% / 5);
+    border: 1px solid black;
 }

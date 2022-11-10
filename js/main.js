@@ -152,6 +152,8 @@ const automaticPlayReverse = setInterval(function(){
 const autoplay = document.getElementById('autoplay');
 // Aggiungo evento al bottone
 autoplay.addEventListener('click', function(){
+    clearInterval(automaticPlay);
+    clearInterval(automaticPlayReverse);
     buttonClicked = false;
     if ( click === false && buttonClicked === false){
         setInterval(function(){
@@ -168,6 +170,8 @@ autoplay.addEventListener('click', function(){
 const autoplayReverse = document.getElementById('autoplay-reverse');
 // Aggiungo evento al bottone
 autoplayReverse.addEventListener('click', function(){
+    clearInterval(automaticPlay);
+    clearInterval(automaticPlayReverse);
     buttonClicked = false;
     if ( click === false && buttonClicked === false){
         setInterval(function(){

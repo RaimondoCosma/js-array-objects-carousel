@@ -105,28 +105,28 @@ function changeSlide(direction){
 CLICK EVENT
 -------------------- */
 // Creo 2 variabili per gestire lo stop e la ripresa dell'intervallo
-let click = false;
-let buttonClicked = true;
+let click = true;
+// let buttonClicked = true;
 
 // Creo evento Click
 // Evento bottone per elemento successivo
 const next = document.querySelector(".next-btn");
 next.addEventListener('click', function() {     
-    clearInterval(automaticPlay); 
-    clearInterval(automaticPlayReverse); 
-    changeSlide('next');
     click = false;
-    buttonClicked = true;
+    // buttonClicked = true;
+    clearInterval(automaticPlay); 
+    clearInterval(automaticPlayReverse);
+    changeSlide('next');
 })
 
 // Evento bottone per elemento precedente
 const prev = document.querySelector(".prev-btn");
 prev.addEventListener('click', function() {
+    click = false;
+    // buttonClicked = true;
     clearInterval(automaticPlay); 
     clearInterval(automaticPlayReverse); 
     changeSlide('prev');
-    click = false;
-    buttonClicked = true;
 })
 // Creo evento Click
 
@@ -154,10 +154,9 @@ const autoplay = document.getElementById('autoplay');
 autoplay.addEventListener('click', function(){
     clearInterval(automaticPlay);
     clearInterval(automaticPlayReverse);
-    buttonClicked = false;
-    if ( click === false && buttonClicked === false){
+    // buttonClicked = false;
+    if ( click === false ){
         setInterval(function(){
-            clearInterval(automaticPlayReverse); 
             changeSlide('next');
         },3000);
         click = true;
@@ -172,8 +171,8 @@ const autoplayReverse = document.getElementById('autoplay-reverse');
 autoplayReverse.addEventListener('click', function(){
     clearInterval(automaticPlay);
     clearInterval(automaticPlayReverse);
-    buttonClicked = false;
-    if ( click === false && buttonClicked === false){
+    // buttonClicked = false;
+    if ( click === false ){
         setInterval(function(){
             changeSlide('prev');
         },3000);
@@ -181,3 +180,31 @@ autoplayReverse.addEventListener('click', function(){
     }
 });
 // Creo evento click con autoplay-reverse al click del bottone
+
+const preview0 = document.getElementById(`preview-0`);
+const preview1 = document.getElementById(`preview-1`);
+const preview2 = document.getElementById(`preview-2`);
+const preview3 = document.getElementById(`preview-3`);
+const preview4 = document.getElementById(`preview-4`);
+images.forEach((element, index) => {
+    let ind = index + 1;
+    let preview = document.getElementById(`preview-${index}`);
+    preview.addEventListener('click', function(){
+        clearInterval(automaticPlay); 
+        clearInterval(automaticPlayReverse); 
+        if ( !this.classList.contains('border-white') ){
+            preview0.classList.remove('border-white');
+            preview1.classList.remove('border-white');
+            preview2.classList.remove('border-white');
+            preview3.classList.remove('border-white');
+            preview4.classList.remove('border-white');
+            this.classList.add('border-white');
+            document.querySelector(`.col__image:nth-child(1)`).classList.remove('show');
+            document.querySelector(`.col__image:nth-child(2)`).classList.remove('show');
+            document.querySelector(`.col__image:nth-child(3)`).classList.remove('show');
+            document.querySelector(`.col__image:nth-child(4)`).classList.remove('show');
+            document.querySelector(`.col__image:nth-child(5)`).classList.remove('show');
+            document.querySelector(`.col__image:nth-child(${ind})`).classList.add('show');
+        }
+    })
+});

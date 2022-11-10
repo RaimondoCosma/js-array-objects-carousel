@@ -29,6 +29,10 @@ const carousel = document.querySelector('.container');
 // Variabile per la clonazione del template creato
 const carouselTemplate = document.getElementById('carousel-template').content.cloneNode(true);
 carousel.append(carouselTemplate);
+
+/* --------------------
+    MAIN CREATION
+-------------------- */
 for ( let i = 0; i < images.length; i++ ){
     const image = images[i];
     const imageContainer = document.querySelector('.image-container');
@@ -69,92 +73,89 @@ for ( let i = 0; i < images.length; i++ ){
     div.append(img);
     previewImage.append(div);
     // Creo contenitore immagini di anteprima
-    
-    // Creo evento Click
-    //  Mi conservo una variabile con valore di active = 0;
-    let active = 0;
-    // Evento bottone per elemento successivo
-    const next = document.querySelector(".next-btn");
-    next.addEventListener('click', function() {
-        clearInterval(automaticPlay); 
-        clearInterval(automaticPlayReverse); 
-        document.querySelectorAll(".col__image")[active].classList.remove("show");
-        document.querySelectorAll(".preview")[active].classList.remove("border-white");
-        if ( active === images.length -1 ) {
-            active = 0;
-        } else {
-            active++;
-        }
-        document.querySelectorAll(".col__image")[active].classList.add("show");
-        document.querySelectorAll(".preview")[active].classList.add("border-white");
-    })
-    // Evento bottone per elemento precedente
-    const prev = document.querySelector(".prev-btn");
-    prev.addEventListener('click', function() { 
-        clearInterval(automaticPlay); 
-        clearInterval(automaticPlayReverse); 
-        document.querySelectorAll(".col__image")[active].classList.remove("show");
-        document.querySelectorAll(".preview")[active].classList.remove("border-white");
-        if (active === 0) {
-            active = images.length - 1;
-        } else {
-            active--;
-        }
-        document.querySelectorAll(".col__image")[active].classList.add("show");
-        document.querySelectorAll(".preview")[active].classList.add("border-white");
-    })
-    // Creo evento Click
-
-    // Creo evento cambio automatico autoplay
-    // Dichiaro una variabileper il set intervall
-    const automaticPlay = setInterval(myFunction, 3000);
-    function myFunction(){
-        clearInterval(automaticPlayReverse); 
-        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
-        document.querySelectorAll(".preview")[active].classList.remove("border-white");
-        if ( active === images.length -1 ) {
-            active = 0;
-        } else {
-            active++;
-        }
-        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
-        document.querySelectorAll(".preview")[active].classList.add("border-white");
-    };
-    // Creo evento cambio automatico autoplay
-
-    // Creo evento cambio automatico autoplay-reverse
-    const automaticPlayReverse = setInterval(functionReverse, 3000);
-    function functionReverse(){
-        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
-        document.querySelectorAll(".preview")[active].classList.remove("border-white");
-        if (active === 0) {
-            active = images.length - 1;
-        } else {
-            active--;
-        }
-        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
-        document.querySelectorAll(".preview")[active].classList.add("border-white");
-    }
-    // Creo evento cambio automatico autoplay-reverse
-
-    // Creo evento click con autoplay al click del bottone
-    // Dichiaro la variabile associata al borttone autoplay
-    const autoplay = document.getElementById('autoplay');
-    // Aggiungo evento al bottone
-    autoplay.addEventListener('click', function(){
-        myFunction();
-    })
-    // Creo evento click con autoplay al click del bottone
-
-    // Creo evento click con autoplay-reverse al click del bottone
-    // Dichiaro la variabile associata al borttone autoplay
-    const autoplayReverse = document.getElementById('autoplay-reverse');
-    // Aggiungo evento al bottone
-    autoplayReverse.addEventListener('click', function(){
-        functionReverse();
-    });
-    // Creo evento click con autoplay-reverse al click del bottone
 }
 
+/* --------------------
+    FUNCTIONS
+-------------------- */
+function changeSlide(direction){
+    document.querySelectorAll(".col__image")[active].classList.remove("show");
+    document.querySelectorAll(".preview")[active].classList.remove("border-white");
+    if ( direction === 'next' ){
+        if ( active === images.length -1 ) {
+            active = 0;
+        } else {
+            active++;
+        }
+    } else if ( direction === 'prev' ){
+        if (active === 0) {
+            active = images.length - 1;
+        } else {
+            active--;
+        }
+    }
+    document.querySelectorAll(".col__image")[active].classList.add("show");
+    document.querySelectorAll(".preview")[active].classList.add("border-white");
+};
+/* --------------------
+    CLICK EVENT
+-------------------- */
+// Creo evento Click
+//  Mi conservo una variabile con valore di active = 0;
+let active = 0;
+// Evento bottone per elemento successivo
+const next = document.querySelector(".next-btn");
+next.addEventListener('click', function() {
+    clearInterval(automaticPlay); 
+    clearInterval(automaticPlayReverse); 
+    changeSlide('next');
+})
 
+// Evento bottone per elemento precedente
+const prev = document.querySelector(".prev-btn");
+prev.addEventListener('click', function() { 
+    clearInterval(automaticPlay); 
+    clearInterval(automaticPlayReverse); 
+    changeSlide('prev');
+})
+// Creo evento Click
 
+/* --------------------
+    AUTOPLAY
+-------------------- */
+// Creo evento cambio automatico autoplay
+// Dichiaro una variabileper il set intervall
+const automaticPlay = setInterval(function(){
+    clearInterval(automaticPlayReverse); 
+    changeSlide('next');
+},3000);
+// Creo evento cambio automatico autoplay
+
+// Creo evento cambio automatico autoplay-reverse
+const automaticPlayReverse = setInterval(function(){
+    changeSlide('prev');
+},3000);
+// Creo evento cambio automatico autoplay-reverse
+
+// Creo evento click con autoplay al click del bottone
+// Dichiaro la variabile associata al borttone autoplay
+const autoplay = document.getElementById('autoplay');
+// Aggiungo evento al bottone
+autoplay.addEventListener('click', function(){
+    setInterval(function(){
+        clearInterval(automaticPlayReverse); 
+        changeSlide('next');
+    },3000);
+})
+// Creo evento click con autoplay al click del bottone
+
+// Creo evento click con autoplay-reverse al click del bottone
+// Dichiaro la variabile associata al borttone autoplay
+const autoplayReverse = document.getElementById('autoplay-reverse');
+// Aggiungo evento al bottone
+autoplayReverse.addEventListener('click', function(){
+    setInterval(function(){
+        changeSlide('prev');
+    },3000);
+});
+// Creo evento click con autoplay-reverse al click del bottone

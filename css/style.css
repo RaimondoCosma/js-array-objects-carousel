@@ -52,6 +52,9 @@ img {
     cursor: pointer;
     border: none;
 }
+.btn button:active {
+    transform: scale(0.94);
+}
 #autoplay {
     background-color: #0a7d41;
 }
@@ -76,7 +79,6 @@ img {
 .preview {
     width: 100%;
     height: calc(100% / 5);
-    border: 1px solid black;
     filter: grayscale(0.8);
 }
 .border-white {
@@ -106,7 +108,7 @@ img {
     HIDE & SHOW
 ------------------------------ */
 .show {
-    opacity: 1 !important;
+    opacity: 1;
     animation: zoom-in 0.5s ease-in-out;
     z-index: 1;
 }
@@ -116,12 +118,12 @@ img {
 ------------------------------ */
 @keyframes zoom-in {
     0% {
-        transform: scale(0.8);
+        transform: scale(0.7);
         opacity: 0;
     }
     50% {
         transform: scale(1.1);
-        opacity: 1;
+        opacity: 0.8;
     }
     100% {
         transform: scale(1);

@@ -69,7 +69,7 @@ for ( let i = 0; i < images.length; i++ ){
     div.append(img);
     previewImage.append(div);
     // Creo contenitore immagini di anteprima
-
+    
     // Creo evento Click
     //  Mi conservo una variabile con valore di active = 0;
     let active = 0;
@@ -78,14 +78,14 @@ for ( let i = 0; i < images.length; i++ ){
     next.addEventListener('click', function() {
         clearInterval(automaticPlay); 
         clearInterval(automaticPlayReverse); 
-        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        document.querySelectorAll(".col__image")[active].classList.remove("show");
         document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if ( active === images.length -1 ) {
             active = 0;
         } else {
             active++;
         }
-        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+        document.querySelectorAll(".col__image")[active].classList.add("show");
         document.querySelectorAll(".preview")[active].classList.add("border-white");
     })
     // Evento bottone per elemento precedente
@@ -93,14 +93,14 @@ for ( let i = 0; i < images.length; i++ ){
     prev.addEventListener('click', function() { 
         clearInterval(automaticPlay); 
         clearInterval(automaticPlayReverse); 
-        imageContainer.querySelectorAll(".col__image")[active].classList.remove("show");
+        document.querySelectorAll(".col__image")[active].classList.remove("show");
         document.querySelectorAll(".preview")[active].classList.remove("border-white");
         if (active === 0) {
             active = images.length - 1;
         } else {
             active--;
         }
-        imageContainer.querySelectorAll(".col__image")[active].classList.add("show");
+        document.querySelectorAll(".col__image")[active].classList.add("show");
         document.querySelectorAll(".preview")[active].classList.add("border-white");
     })
     // Creo evento Click

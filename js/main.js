@@ -117,7 +117,6 @@ function thumbClicked(){
                 }
                 document.querySelector(`.col__image:nth-child(${ind})`).classList.add('show');
                 active = index;
-                buttonClicked = true;
             }
         })
     });
@@ -127,24 +126,20 @@ CLICK EVENT
 -------------------- */
 thumbClicked();
 
-// Creo 2 variabili per gestire lo stop e la ripresa dell'intervallo
-let intervall = false;
-let buttonClicked = false;
-
 // Creo evento Click
 // Evento bottone per elemento successivo
 const next = document.querySelector(".next-btn");
 next.addEventListener('click', function() {     
-    buttonClicked = true;
     clearInterval(automaticPlay); 
+    automaticPlay = false;
     changeSlide('next');
 })
 
 // Evento bottone per elemento precedente
 const prev = document.querySelector(".prev-btn");
 prev.addEventListener('click', function() {
-    buttonClicked = true;
     clearInterval(automaticPlay); 
+    automaticPlay = false;
     changeSlide('prev');
 })
 // Creo evento Click
@@ -153,8 +148,8 @@ prev.addEventListener('click', function() {
     AUTOPLAY
 -------------------- */
 // Creo evento cambio automatico autoplay
-// Dichiaro una variabileper il set intervall
-const automaticPlay = setInterval(function(){
+// Dichiaro una variabile per il set intervall
+let automaticPlay = setInterval(function(){
     changeSlide('next');
 },3000);
 // Creo evento cambio automatico autoplay
@@ -165,18 +160,10 @@ const autoplay = document.getElementById('autoplay');
 // Aggiungo evento al bottone
 autoplay.addEventListener('click', function(){
     clearInterval(automaticPlay);
-    buttonClicked = false;
-    if ( intervall === false ){
-        if ( !buttonClicked ){
-            automaticPlay = setInterval(function(){
-                changeSlide('next');
-            },3000);
-        } else {
-            clearInterval(automaticPlay);
-        }
-    }
-    intervall = true;
-})
+    automaticPlay = setInterval(function(){
+        changeSlide('next');
+    },3000);
+});
 // Creo evento click con autoplay al click del bottone
 
 // Creo evento click con autoplay-reverse al click del bottone
@@ -185,12 +172,8 @@ const autoplayReverse = document.getElementById('autoplay-reverse');
 // Aggiungo evento al bottone
 autoplayReverse.addEventListener('click', function(){
     clearInterval(automaticPlay);
-    // buttonClicked = false;
-    if ( intervall === false ){
-        setInterval(function(){
-            changeSlide('prev');
-        },3000);
-        intervall = true;
-    }
+    automaticPlay = setInterval(function(){
+        changeSlide('prev');
+    },3000);
 });
 // Creo evento click con autoplay-reverse al click del bottone
